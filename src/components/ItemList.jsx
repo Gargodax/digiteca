@@ -17,7 +17,7 @@ const ItemList = () => {
 
     return (
         <div>
-            <h2>Lista de libros</h2>
+            <h2 style={{ margin: '1em' }}>Lista de libros</h2>
             <ul style={{ listStyleType: 'none', padding: 0, display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
                 {books.map((book) => <Item key={book.id} book={book} />
 

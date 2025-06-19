@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
-
-
+import { useLocation } from "react-router-dom";
+import ItemDetail from "./ItemDetail";
 const ItemDetailContainer = () => {
-    useEffect(() => {
+    const location = useLocation();
+    const { book } = location.state || {};
 
-        console.log("Cargando detalles del libro...");
-    }, []);
-    
     return (
-        <div>
-            <h2>Detalle del libro</h2>
-            <p>Detalles del libro seleccionado.</p>
-        </div>
-    );
-
+        <>
+            <div style={{ textAlign: 'center', margin: '20px' }}>
+                <ItemDetail item={book} />
+            </div>
+        </>
+    )
 
 }
 

@@ -1,0 +1,5 @@
+.home-logo-image {
+    filter: drop-shadow(2.5px 2.5px 2px whitesmoke);
+    width: 30%;
+    border-radius: 10px;
+}
