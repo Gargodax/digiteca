@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 const ItemDetail = ({ item }) => {
     // Desestructuración del objeto item
-    const { id, title, author, price, description, category, image } = item;
+    const { title, author, price, description, category, image } = item;
 
+    if (!item) {
+        return <p>Loading...</p>;
+    }
     return (
         <div style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '10px', width: '300px', margin: '20px auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h2>{title}</h2>

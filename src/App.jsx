@@ -16,7 +16,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path='/' element={<ItemListContainer saludo='Bienvenidos a Digiteca' />} />
-          <Route path='/category/:categoryId' element={<ItemListContainer saludo='Categoría: ' />} />
+          <Route path='/category/:categoryName' element={<ItemListContainer />} />
           <Route path='/item/:id' element={<ItemDetailContainer />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>

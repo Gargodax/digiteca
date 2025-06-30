@@ -159,7 +159,7 @@
         "price": 18.75,
         "description": "Un thriller psicológico atrapante.",
         "category": "thriller",
-        "image": "https://covers.openlibrary.org/b/isbn/9788466638813-M.jpg"
+        "image": "../../src/assets/images/imgNoDisponible.png"
     },
     {
         "id": 19,

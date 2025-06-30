@@ -1,25 +1,17 @@
-import { useState, useEffect } from "react";
-import useFetch from "../hooks/useFetch.jsx";
 import Item from "./Item.jsx";
 
-const ItemList = () => {
-    const [books, setBooks] = useState([]);
-    const { data, loading, error } = useFetch('/data/fakeBooks.json');
+const ItemList = ({ data }) => {
 
-    useEffect(() => {
-        if (data) {
-            setBooks(data);
-        }
-    }, [data]);
-
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
-
+    // Si data es undefined o no tiene elementos, se mostrará mensaje correspondiente
+    if (!data || data.length === 0) {
+        return <p>No hay libros disponibles.</p>;
+    }
+    
     return (
         <div>
             <h2 style={{ margin: '1em' }}>Lista de libros</h2>
             <ul style={{ listStyleType: 'none', padding: 0, display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
-                {books.map((book) => <Item key={book.id} book={book} />
+                {data.map((book) => <Item key={book.id} book={book} />
 
                 )}
             </ul>
