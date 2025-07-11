@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import ItemList from "./ItemList";
 import { useParams } from 'react-router-dom';
+import LoaderComponent from './LoaderComponent';
+
 const ItemListContainer = (props) => {
 
     const [books, setBooks] = useState([]);
@@ -9,6 +11,7 @@ const ItemListContainer = (props) => {
     const { data, loading, error } = useFetch('/data/fakeBooks.json');
 
     useEffect(() => {
+        
         if (data) {
             // Si hay un categoryName en los parámetros de la URL, filtrar los libros por esa categoría
 
@@ -28,13 +31,13 @@ const ItemListContainer = (props) => {
         }
     }, [data, categoryName]);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <LoaderComponent />;
     if (error) return <p>Error: {error}</p>;
 
     return (
         <>
             <div style={{ textAlign: 'center', margin: '20px' }}>
-                <h1>{categoryName}</h1>
+                <h1>{categoryName ? categoryName : props.saludo}</h1>
             </div>
             <ItemList data={books} />
         </>

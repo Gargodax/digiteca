@@ -14,10 +14,9 @@ const Item = ({ book }) => {
                 </div>
             </div>
             <div className="cta-area">
-                <Link to={`/item/${id}`} style={{ display: 'block' }} state={{ book }}>
+                <Link to={`/item/${id}`} style={{ display: 'block', width: '100%', textAlign: 'center' }} state={{ book }}>
                     Ver detalles
                 </Link>
-                <button>Agregar al carrito</button>
             </div>
 
         </li >

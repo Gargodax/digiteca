@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import ItemDetail from "./ItemDetail";
+import LoaderComponent from "./LoaderComponent";
 
 const ItemDetailContainer = () => {
 
@@ -16,15 +17,16 @@ const ItemDetailContainer = () => {
         }
     }, [data, id]);
 
-    if (loading) return <p>Cargando...</p>;
-    if (error) return <p>Error al cargar el libro: {error}</p>;
-    if (!book) return <p>Libro no encontrado.</p>;
+    if (loading) return <LoaderComponent />;
+    if (error) return <h4 style={{ padding:'1em', margin: '1em', fontSize:'1.5em',textAlign: 'center' }}>Error al cargar el libro: {error}</h4>;
+    if (!book) return <h4 style={{ padding:'1em', margin: '1em', fontSize:'1.5em',textAlign: 'center' }}>Libro no encontrado.</h4>;
 
     return (
         <>
             <div style={{ textAlign: 'center', margin: '20px' }}>
                 <ItemDetail item={book} />
             </div>
+            
         </>
     )
 

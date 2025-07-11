@@ -4,9 +4,9 @@ const ItemList = ({ data }) => {
 
     // Si data es undefined o no tiene elementos, se mostrará mensaje correspondiente
     if (!data || data.length === 0) {
-        return <p>No hay libros disponibles.</p>;
+        return <h4 style={{ padding:'1em', margin: '1em', fontSize:'1.5em',textAlign: 'center' }}>No hay libros disponibles.</h4>;
     }
-    
+
     return (
         <div>
             <h2 style={{ margin: '1em' }}>Lista de libros</h2>
