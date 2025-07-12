@@ -14,7 +14,9 @@ const NavBar = () => {
             </div>
             <div className='nav-links-container'>
                 <CategoryDropdown />
+                <Link to={"/cart"} className="nav-link">
                 <CartWidget />
+                </Link>
             </div>
         </nav>
     )

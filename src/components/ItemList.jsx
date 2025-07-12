@@ -1,10 +1,13 @@
 import Item from "./Item.jsx";
+import ErrorPage from "./ErrorPage.jsx";
 
 const ItemList = ({ data }) => {
 
     // Si data es undefined o no tiene elementos, se mostrará mensaje correspondiente
     if (!data || data.length === 0) {
-        return <h4 style={{ padding:'1em', margin: '1em', fontSize:'1.5em',textAlign: 'center' }}>No hay libros disponibles.</h4>;
+        return (
+            <ErrorPage message="No hay libros disponibles" />
+        );
     }
 
     return (

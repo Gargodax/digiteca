@@ -1,32 +1,54 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
 import ItemDetail from "./ItemDetail";
 import LoaderComponent from "./LoaderComponent";
+import { collection, doc, getDoc } from "firebase/firestore";
+import { dataBase } from "../service/firebase.jsx";
+import ErrorPage from "./ErrorPage";
 
 const ItemDetailContainer = () => {
 
-    const [book, setBook] = useState(null);
+    const [book, setBook] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [invalid, setInvalid] = useState(false);
     const { id } = useParams();
-    const { data, loading, error } = useFetch('/data/fakeBooks.json');
 
+    //Firebase
     useEffect(() => {
-        if (data) {
-            const foundBook = data.find((item) => item.id === parseInt(id));
-            setBook(foundBook);
-        }
-    }, [data, id]);
-
-    if (loading) return <LoaderComponent />;
-    if (error) return <h4 style={{ padding:'1em', margin: '1em', fontSize:'1.5em',textAlign: 'center' }}>Error al cargar el libro: {error}</h4>;
-    if (!book) return <h4 style={{ padding:'1em', margin: '1em', fontSize:'1.5em',textAlign: 'center' }}>Libro no encontrado.</h4>;
+        // Encender loader
+        setLoading(true);
+        // Conexión con la colección de Firebase
+        const booksCollection = collection(dataBase, 'books');
+        // Crear referencia
+        const docRef = doc(booksCollection, id);
+        // Solicitud del documento
+        getDoc(docRef)
+            .then((res) => {
+                if (res.data()) {
+                    setBook({ id: res.id, ...res.data() });
+                } else {
+                    setInvalid(true);
+                }
+            })
+            .catch((error) =>
+                console.error("Error fetching book: ", error))
+            .finally(() => {
+                // Apagar loader
+                setLoading(false);
+            })
+    }, [])
 
     return (
         <>
-            <div style={{ textAlign: 'center', margin: '20px' }}>
-                <ItemDetail item={book} />
-            </div>
-            
+
+            {loading ?
+                <LoaderComponent />
+                : invalid ?
+                    <ErrorPage message="Libro no encontrado" />
+                    : <div style={{ textAlign: 'center', margin: '20px' }}>
+                        <ItemDetail item={book} />
+                    </div>
+            }
         </>
     )
 

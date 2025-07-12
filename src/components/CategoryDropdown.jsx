@@ -1,30 +1,33 @@
 import { useState, useEffect } from "react";
-import useFetch from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import '../css/CategoryDropdown.css';
+import { collection, getDocs } from "firebase/firestore";
+import { dataBase } from "../service/firebase.jsx";
+
 
 const CategoryDropdown = () => {
     const [categories, setCategories] = useState([]);
-    const { data, loading, error } = useFetch('/data/fakeBooks.json');
     const navigate = useNavigate();
 
+    // Traer categorias de Firebase
     useEffect(() => {
-        if (data) {
-            // Extraer las categorías únicas y capitalizar la primera letra
-            const uniqueCategories = [...new Set(
-                data.map(book =>
-                    book.category.charAt(0).toUpperCase() + book.category.slice(1).toLowerCase()
-                )
-            )];
-            // Ordenarlas alfabéticamente
-            const sortedCategories = uniqueCategories.sort((a, b) => a.localeCompare(b));
-            setCategories(sortedCategories.map(name => ({ name })));
-        }
-    }, [data]);
+        // Conexión con la colección de Firebase
+        const booksCollection = collection(dataBase, 'books');
+        // Solicitud de los datos
+        getDocs(booksCollection)
+            .then((res) => {
+                // Extraer las categorías únicas y capitalizar la primera letra
+                const uniqueCategories = [...new Set(
+                    res.docs.map(doc => doc.data().category.charAt(0).toUpperCase() + doc.data().category.slice(1).toLowerCase())
+                )];
+                // Ordenarlas alfabéticamente
+                const sortedCategories = uniqueCategories.sort((a, b) => a.localeCompare(b));
+                setCategories(sortedCategories.map(name => ({ name })));
+            })
+            .catch((error) =>
+                console.error("Error fetching categories: ", error))
 
-    if (loading) return <p>Cargando categorías...</p>;
-    if (error) return <p>Error al cargar categorías: {error}</p>;
-    if (!categories.length) return <p>No hay categorías disponibles.</p>;
+    }, [categories.length]);
 
     return (
         <div className="category-dropdown">

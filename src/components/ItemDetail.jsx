@@ -17,10 +17,8 @@ const ItemDetail = ({ item }) => {
         setPurchase(true);
     };
 
-
-
     // Desestructuración del objeto item
-    const { title, author, price, description, category, image } = item;
+    const { title, author, price, description, category, stock, image } = item;
 
     if (!item) {
         return <p>Loading...</p>;
@@ -34,15 +32,16 @@ const ItemDetail = ({ item }) => {
             <p>Categoría: {category}</p>
             <p>Descripción: {description}</p>
             <p>Precio: ${price}</p>
+            <p>Stock: {stock} u.</p>
             <br />
 
             {purchase ?
                 <>
-                    <p style={{ width: '100%', color: 'red', fontSize: '1.2em', fontWeight: 'bold' }}>¡Gracias por tu compra!</p>
+                    <p style={{ width: '100%', color: 'red', fontSize: '1.2em', fontWeight: 'bold' }}>¡Gracias!</p>
                     <Link to={'/cart'} style={{ width: '100%' }}>
                         <button style={{ width: '90%', margin: '.5em', border: '1px solid #ccc', borderRadius: '5px', backgroundColor: 'lightsteelblue' }}>Ver carrito</button>
                     </Link></>
-                : <ItemCount onAdd={onAdd} />}
+                : <ItemCount stockLimit={stock} onAdd={onAdd} />}
 
 
             <Link to='/' className="home" >Volver a Home</Link>

@@ -1,45 +1,60 @@
 import { useState, useEffect } from 'react';
-import useFetch from '../hooks/useFetch';
 import ItemList from "./ItemList";
 import { useParams } from 'react-router-dom';
 import LoaderComponent from './LoaderComponent';
+import { collection, getDocs, addDoc, query, where } from 'firebase/firestore';
+import { dataBase } from '../service/firebase.jsx';
+
 
 const ItemListContainer = (props) => {
 
     const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false);
     const { categoryName } = useParams();
-    const { data, loading, error } = useFetch('/data/fakeBooks.json');
 
+    // Firebase
     useEffect(() => {
-        
-        if (data) {
-            // Si hay un categoryName en los parámetros de la URL, filtrar los libros por esa categoría
+        // Encender Loader
+        setLoading(true);
 
-            if (!categoryName || categoryName === 'todas las caftegorías') {
-                setBooks(data);
-            }
-            else {
-                const filteredBooks = data.filter(book => book.category.toLowerCase() === categoryName.toLowerCase());
-                setBooks(filteredBooks);
-            }
+        //Conexión con la colección de Firebase
+        const booksCollection = categoryName && categoryName !== 'todas las categorías'
+            ? query(collection(dataBase, 'books'), where("category", "==", categoryName))
+            : collection(dataBase, 'books')
+        // Solicitud de los datos
+        getDocs(booksCollection)
+            .then((res) => {
+                // Limpiar los datos y convertirlos a un array
+                const list = res.docs.map((doc) => {
+                    return {
+                        id: doc.id,
+                        ...doc.data()
+                    };
+                });
+                setBooks(list);
+            })
+            .catch((error) =>
+                console.error("Error fetching books: ", error))
+            .finally(() => {
+                // Apagar Loader
+                setLoading(false);
+            })
 
-            // Si categoryName es 'todas las categorías', mostrar todos los libros
-            if (categoryName && categoryName.toLowerCase() === 'todas las categorías') {
-                setBooks(data);
-            }
-
-        }
-    }, [data, categoryName]);
-
-    if (loading) return <LoaderComponent />;
-    if (error) return <p>Error: {error}</p>;
+    }, [categoryName]);
 
     return (
         <>
-            <div style={{ textAlign: 'center', margin: '20px' }}>
-                <h1>{categoryName ? categoryName : props.saludo}</h1>
-            </div>
-            <ItemList data={books} />
+            {loading ?
+                <LoaderComponent /> :
+                <div>
+                    <div style={{ textAlign: 'center', margin: '20px' }}>
+                        <h1>{categoryName ? categoryName : props.saludo}</h1>
+                    </div>
+                    <ItemList data={books} />
+                </div>
+
+
+            }
         </>
     )
 

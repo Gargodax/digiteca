@@ -42,15 +42,13 @@ export const CartProvider = ({ children }) => {
 
     // cantidad de items en el carrito
     const getItemCount = () => {
-        return cart.reduce((acc, item) => acc + item.quantity, 0);
+        return cart.reduce((acc, item) => acc += item.quantity, 0);
     }
 
     // total a pagar
     const getTotalPrice = () => {
-        return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        return cart.reduce((acc, item) => acc += item.price * item.quantity, 0).toFixed(2);
     }
-
-    console.log(cart);
 
     return (
         <CartContext.Provider value={{ cart, addItem, removeItem, clearCart, isInCart, getItemCount, getTotalPrice }}>

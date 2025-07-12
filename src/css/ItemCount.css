@@ -26,7 +26,7 @@
 }
 
 .addToCart-btn {
-    background-color: #5a6f8c;
+    background-color: #7191b1;
     color: white;
     font-weight: bold;
     font-size: 16px;
@@ -35,6 +35,15 @@
     border-radius: 5px;
     cursor: pointer;
     width: 65%;
+}
+
+.addToCart-btn:hover {
+    background-color: #5a6f8c;
+}
+
+.addToCart-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 .home {

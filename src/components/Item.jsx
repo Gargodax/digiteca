@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import '../css/Item.css';
 const Item = ({ book }) => {
     // Desestrucuturación del objeto book
-    const { id, title, author, price, category, image } = book;
+    const { id, title, author, price, image } = book;
     return (
         <li key={id} >
             <h3>{title}</h3>

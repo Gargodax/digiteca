@@ -1,4 +1,3 @@
-import { useState, CSSProperties } from "react";
 import { CircleLoader } from "react-spinners";
 
 const LoaderComponent = () => {
