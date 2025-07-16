@@ -1,12 +1,53 @@
-# React + Vite
+# 📚 Digiteca
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Digiteca es una aplicación web de biblioteca digital desarrollada como parte de un curso de React. Permite a los usuarios explorar libros, ver detalles, y simular una experiencia de e-commerce básica.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologías utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚛️ React
+- 🔁 React Router DOM
+- 📄 React Hook Form
+- 🔥 Firebase (Base de datos)
+- 🎡 React Spinners (indicadores de carga)
+- 🎨 CSS puro (sin frameworks)
 
-## Expanding the ESLint configuration
+## 📂 Estructura general
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+El proyecto sigue una arquitectura de componentes reutilizables y navegación basada en rutas. Se integra con Firebase para el manejo de datos persistentes.
+
+## 🛠️ Instalación
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/Gargodax/digiteca.git
+cd digiteca
+```
+
+2. Instala las dependencias:
+
+```bash
+npm install
+```
+
+3. Ejecuta la app en desarrollo:
+
+```bash
+npm run dev
+```
+
+## ✨ Funcionalidades
+
+- Visualización de catálogo de libros
+- Detalles individuales por libro
+- Formularios de contacto o compra con validación
+- Indicadores de carga con React Spinners
+- Navegación SPA con React Router
+
+## 🤝 Contribuciones
+Este proyecto forma parte de un curso, pero estás invitado a sugerir mejoras o reportar errores a través de issues o pull requests.
+
+## 📄 Licencia
+Este proyecto está bajo una licencia educativa (sin uso comercial).
+
+Desarrollado por Axel Emmanuel Garay Godoy.
