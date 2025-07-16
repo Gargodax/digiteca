@@ -4,6 +4,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { dataBase } from '../service/firebase'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import '../css/Checkout.css'
 
 const Checkout = () => {
     const [orderId, setOrderId] = useState('')
@@ -47,7 +48,7 @@ const Checkout = () => {
                         <br />
                         <Link to="/" style={{ color: 'blue', textDecoration: 'underline' }}>Volver al inicio</Link>
                     </div >
-                    : <div>
+                    : <div className='form-container'>
                         <h1>Complete con sus datos</h1>
                         <form onSubmit={handleSubmit(finalizarCompra)}>
                             <input className='form-control' type="text" name='name' placeholder='Ingrese su nombre' {...register('name', { required: true, minLength: 3 })} />
