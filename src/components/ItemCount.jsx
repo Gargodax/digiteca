@@ -25,7 +25,7 @@ const ItemCount = (props) => {
                 <span>{count}</span>
                 <button className='adder-btn' onClick={handleIncrement}>+</button>
             </div>
-            <button className='addToCart-btn' onClick={handleAddToCart} disabled={stockLimit === 0} >Agregar al carrito</button>
+            <button className='addToCart-btn' onClick={handleAddToCart} disabled={stockLimit === 0 || count === 0} >Agregar al carrito</button>
         </div>
     )
 }

@@ -4,7 +4,7 @@ const Item = ({ book }) => {
     // Desestrucuturación del objeto book
     const { id, title, author, price, image } = book;
     return (
-        <li key={id} >
+        <li key={id} style={{ backgroundColor: 'azure' }} >
             <h3>{title}</h3>
             <div className="info">
                 <img src={image} alt={title} />

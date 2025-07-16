@@ -2,25 +2,35 @@ import { useContext } from "react"
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
+import '../css/Cart.css';
 
 const Cart = () => {
   // Consumir contexto del carrito de compras
   const { cart, clearCart, getItemCount, getTotalPrice } = useContext(CartContext);
-
+  const plural = getItemCount() > 1 ? 'ítems' : 'ítem';
   return (
     <>
-      <h2>Tu carrito de compras</h2>
-      <div style={{ textAlign: 'center', margin: '20px' }}>
-        <ul style={{ listStyleType: 'none', padding: 0, display: 'flex', flexDirection: 'row' }}>
-          {cart.map(item => (
-            <CartItem key={item.id} item={item} />
-          ))}
-        </ul>
-        <p>Total a pagar: ${getTotalPrice()}</p>
-        <button onClick={clearCart} style={{ margin: '10px', padding: '10px 20px', backgroundColor: 'lightcoral', color: 'white', border: 'none', borderRadius: '5px' }}>Vaciar carrito</button>
+      <h2 >Verifica el carrito</h2>
+      <div className="list-container">
+        <div>
+          <ul className="item-list" >
+            {cart.map(item => (
+              <CartItem key={item.id} item={item} />
+            ))}
+          </ul>
+        </div>
+        <li className="total-price-container" >
+          <h4>Total a pagar: ${getTotalPrice()} ({getItemCount()} {plural}) </h4>
+        </li>
+      </div>
+      <div className="btn-area" >
         <Link to='/' className="home" >
-          <button style={{ margin: '10px', padding: '10px 20px', backgroundColor: 'lightsteelblue', color: 'black', border: 'none', borderRadius: '5px' }}>Volver a Home</button>
+          <button className="home-btn" >Volver a Home</button>
         </Link>
+        <Link to='/checkout'>
+          <button className="buy" >Comprar</button>
+        </Link>
+        <button className="clear-cart" onClick={clearCart} >Vaciar carrito</button>
       </div>
     </>
   );

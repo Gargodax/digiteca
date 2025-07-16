@@ -1,0 +1,70 @@
+h2 {
+    margin-top: 1em;
+    text-align: center;
+}
+
+.list-container {
+    width: 65%;
+    margin: 20px;
+    padding: .5em;
+    place-self: center;
+    height: 65vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 1em 1em 1em #ccc;
+}
+
+.list-container div {
+    height: 90%;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.item-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.total-price-container {
+    width: 90%;
+    background-color: #FFF9F0;
+    font-size: 1.2em;
+    place-self: center;
+    margin: .5em;
+    box-shadow: .25em .25em .25em rgba(0, 0, 0, 0.2) inset;
+}
+
+.btn-area {
+    width: 65%;
+    text-align: center;
+    place-self: center;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    box-shadow: 1em -1em 1em #ccc;
+}
+
+.btn-area button {
+    width: 10em;
+    margin: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.buy {
+    background-color: lightgreen;
+    color: black;
+}
+
+.home-btn {
+    background-color: #7191b1;
+    color: white;
+}
+
+.clear-cart {
+    background-color: lightcoral;
+    color: black;
+}
